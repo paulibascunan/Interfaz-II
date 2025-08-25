@@ -50,7 +50,8 @@ void loop() {
   }
 }
 ```
-<img src="https://raw.githubusercontent.com/paulibascunan/Interfaz-II/refs/heads/main/img/Captura%20de%20pantalla%202025-08-25%20103606.png"/>
+<img src"https://raw.githubusercontent.com/paulibascunan/Interfaz-II/refs/heads/main/img/Captura%20de%20pantalla%202025-08-25%20103606.png"/>
+
 
 ##### ejercicio 4: led potenciómetro
 
