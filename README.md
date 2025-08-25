@@ -33,6 +33,7 @@ void loop() {   // Se repite infinitamente
   delay(500);             // Esperar 1 segundo
 }
 ```
+<img src="https://raw.githubusercontent.com/paulibascunan/Interfaz-II/refs/heads/main/img/led%20parpadeante.png"/>
 
 ##### ejercicio 3: led pulsador
 
