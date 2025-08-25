@@ -114,3 +114,4 @@ void loop() {
 ```
 }
 ```
+<img src= https://raw.githubusercontent.com/paulibascunan/Interfaz-II/refs/heads/main/img/sem%C3%A1foro.png"/>
