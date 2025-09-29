@@ -234,6 +234,29 @@ void draw() {
         }
       }
     }
+
+ejercicio n° 8: if else
+int valor;  // aquí guardaremos la lectura del sensor
+
+void setup() {
+  Serial.begin(9600);   // Inicia la comunicación serial
+}
+
+void loop() {
+  valor = analogRead(A0);   // lee el pin analógico A0
+
+  if (valor < 100) {
+    Serial.println("Muy bajo");
+  } else if (valor < 600) {
+    Serial.println("Medio");
+  } else {
+    Serial.println("Alto");
+  }
+
+  delay(500); // medio segundo entre lecturas
+}
+
+```
   }
 }
 
