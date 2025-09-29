@@ -235,7 +235,7 @@ void draw() {
       }
     }
 
-ejercicio n° 8: if else
+##### ejercicio n° 8: if else
 int valor;  // aquí guardaremos la lectura del sensor
 
 void setup() {
