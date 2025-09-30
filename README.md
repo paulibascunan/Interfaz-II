@@ -63,6 +63,9 @@ void loop() {
   int valor = analogRead(A0);           // Leer potenciómetro (0-1023)
 }
 ```
+<img src="https://github.com/paulibascunan/Interfaz-II/blob/af092bc40aa82b4fb534ecdc3a89398a582f28b9/img/potenciometro.png"/>
+
+
 
 ##### ejercicio 5: semáforo
 
