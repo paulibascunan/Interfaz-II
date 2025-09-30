@@ -238,6 +238,8 @@ void draw() {
       }
     }
 ```
+<img src="https://github.com/paulibascunan/Interfaz-II/blob/d7072d4a1b66c61a96476b9a26aa9d800d7f32ae/img/circulos%20potenciometro.png"/>
+
 
 ##### ejercicio n° 8: if else
 ```js
