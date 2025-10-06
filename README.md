@@ -373,7 +373,130 @@ void playTrack(int index) {
   // Actualizamos la variable para saber cuál es la pista activa
   currentTrack = index;
 }
+
+
 ```
 <img src="https://github.com/paulibascunan/Interfaz-II/blob/618c4a00e2da32f89323b587b4cfe3d2796660c4/img/botonera.png"/>
 
+##### ejercicio n11 semaforo mas boton
+``` js
+// Semáforo Autos y Peatones con botón ON/OFF (sin delay) - CORREGIDO
 
+// Pines LEDs
+int LED_1 = 6; // Rojo autos
+int LED_2 = 7; // Amarillo autos
+int LED_3 = 8; // Verde autos
+int LED_4 = 9; // Verde peatones
+int LED_5 = 10; // Rojo peatones
+
+// Pin botón
+int boton = 2;
+
+// Variables del botón
+bool encendido = true;
+int estadoBoton = 0;
+int lastEstadoBoton = 0;
+unsigned long lastDebounceTime = 0;
+unsigned long debounceDelay = 50;
+
+// Variables del semáforo
+unsigned long previousMillis = 0;
+int fase = 0;
+
+void setup() {
+pinMode(LED_1, OUTPUT);
+pinMode(LED_2, OUTPUT);
+pinMode(LED_3, OUTPUT);
+pinMode(LED_4, OUTPUT);
+pinMode(LED_5, OUTPUT);
+
+pinMode(boton, INPUT);
+}
+
+void loop() {
+// --- Leer botón con antirrebote ---
+int lectura = digitalRead(boton);
+
+if (lectura != lastEstadoBoton) {
+lastDebounceTime = millis();
+}
+
+if ((millis() - lastDebounceTime) > debounceDelay) {
+if (lectura != estadoBoton) {
+estadoBoton = lectura;
+if (estadoBoton == HIGH) {
+encendido = !encendido; // Cambia el estado
+}
+}
+}
+lastEstadoBoton = lectura;
+
+// --- Semáforo ---
+if (encendido) {
+unsigned long currentMillis = millis();
+
+switch(fase) {
+case 0: // Autos verde, peatones rojo
+digitalWrite(LED_1, LOW);
+digitalWrite(LED_2, LOW);
+digitalWrite(LED_3, HIGH);
+digitalWrite(LED_4, LOW);
+digitalWrite(LED_5, HIGH);
+
+if (currentMillis - previousMillis >= 5000) {
+previousMillis = currentMillis;
+fase = 1;
+}
+break;
+
+case 1: // Autos amarillo, peatones rojo
+digitalWrite(LED_3, LOW);
+digitalWrite(LED_2, HIGH);
+digitalWrite(LED_1, LOW);
+digitalWrite(LED_4, LOW);
+digitalWrite(LED_5, HIGH);
+
+if (currentMillis - previousMillis >= 2000) {
+previousMillis = currentMillis;
+digitalWrite(LED_2, LOW); // Apagar amarillo al terminar
+fase = 2;
+}
+break;
+
+case 2: // Autos rojo, peatones verde
+digitalWrite(LED_1, HIGH);
+digitalWrite(LED_2, LOW);
+digitalWrite(LED_3, LOW);
+digitalWrite(LED_4, HIGH);
+digitalWrite(LED_5, LOW);
+
+if (currentMillis - previousMillis >= 5000) {
+previousMillis = currentMillis;
+fase = 3;
+}
+break;
+
+case 3: // Ambos rojo (intermedio)
+digitalWrite(LED_1, HIGH);
+digitalWrite(LED_2, LOW);
+digitalWrite(LED_3, LOW);
+digitalWrite(LED_4, LOW);
+digitalWrite(LED_5, HIGH);
+
+if (currentMillis - previousMillis >= 2000) {
+previousMillis = currentMillis;
+fase = 0;
+}
+break;
+}
+} else {
+// Apagar todos los LEDs si está apagado
+digitalWrite(LED_1, LOW);
+digitalWrite(LED_2, LOW);
+digitalWrite(LED_3, LOW);
+digitalWrite(LED_4, LOW);
+digitalWrite(LED_5, LOW);
+}
+}
+
+```
