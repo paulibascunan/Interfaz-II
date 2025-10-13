@@ -1,5 +1,5 @@
 ##### Introducción a processing y arduino para el desarrollo de una interfaz interactiva
-1. [Hola mundo] (#https://github.com/paulibascunan/Interfaz-II#ejercicio-numero-1-hola-mundo) <br>
+1. [Hola mundo](#https://github.com/paulibascunan/Interfaz-II#ejercicio-numero-1-hola-mundo) <br>
 # Interfaz-II
 ##### ejercicio numero 1: hola mundo
 
