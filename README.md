@@ -504,6 +504,7 @@ digitalWrite(LED_5, LOW);
 ```
 
 ##### ejercicio n12 codigo sensor processing en grupo
+``` js
 import processing.serial.*;
 import processing.sound.*;
 
