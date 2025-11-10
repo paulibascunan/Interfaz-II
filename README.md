@@ -502,3 +502,75 @@ digitalWrite(LED_5, LOW);
 }
 
 ```
+
+##### ejercicio n12 codigo sensor processing en grupo
+import processing.serial.*;
+import processing.sound.*;
+
+Serial arduino;
+int lectura = 0;
+
+// Umbrales de distancia
+int cerca = 300;
+int medio = 500;
+int lejos = 800;
+
+// Sonido
+SoundFile[] sonidos;
+int sonidoIndex = 0;
+
+void setup() {
+  size(400, 400);
+  println(Serial.list()); // Muestra los puertos disponibles
+  arduino = new Serial(this, Serial.list()[0], 9600);
+
+  // Cargar sonidos campanillaa-z.mp3
+  sonidos = new SoundFile[26];
+  for (int i = 0; i < 26; i++) {
+    char letra = (char)('a' + i);  // minúsculas
+    String nombre = "campanilla" + letra + ".mp3";
+    sonidos[i] = new SoundFile(this, nombre);
+  }
+}
+
+void draw() {
+  background(0);
+
+  // Leer datos del Arduino
+  while (arduino.available() > 0) {
+    String val = arduino.readStringUntil('\n');
+    if (val != null) {
+      val = val.trim();
+      lectura = int(val);
+    }
+  }
+
+  // Cambiar color según distancia
+  if (lectura < cerca) {
+    fill(255, 0, 0); // ROJO
+    reproducirSonido();
+  } else if (lectura < medio) {
+    fill(255, 255, 0); // AMARILLO
+  } else if (lectura < lejos) {
+    fill(0, 255, 0); // VERDE
+  } else {
+    fill(50); // Gris oscuro (sin detección)
+  }
+
+  ellipse(width/2, height/2, 200, 200);
+
+  // Mostrar lectura
+  fill(255);
+  textSize(16);
+  textAlign(CENTER);
+  text("Lectura: " + lectura, width/2, height - 30);
+}
+
+// Función para reproducir el siguiente sonido
+void reproducirSonido() {
+  if (!sonidos[sonidoIndex].isPlaying()) {
+    sonidos[sonidoIndex].play();
+    sonidoIndex = (sonidoIndex + 1) % sonidos.length; // Alternar a-z
+  }
+}
+```
