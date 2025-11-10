@@ -575,3 +575,4 @@ void reproducirSonido() {
   }
 }
 ```
+<img src="https://github.com/paulibascunan/Interfaz-II/blob/abfa920a57c016b439a7aa1e3872ea80f6c45b62/img/Captura%20de%20pantalla%202025-11-10%20092452.png"/>
