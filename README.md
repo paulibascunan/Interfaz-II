@@ -4,6 +4,7 @@
 3. [led pulsador](#ejercicio-3-led-pulsador) <br>
 4. [led potenciómetro ](#ejercicio-4-led-potenci%C3%B3metro) <br>
 5. [semáforo](#ejercicio-5-sem%C3%A1foro) <br>
+6. [semáforo parpadeante](#ejercicio-n6-semaforo-parpadeante)  <br>
 # Interfaz-II
 ##### ejercicio numero 1: hola mundo
 
