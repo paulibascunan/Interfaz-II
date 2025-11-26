@@ -10,6 +10,7 @@
 9. [for if](#ejercicio-n9-for-if) <br>
 10. [botonera con sonido](#ejercicio-n10-botonera-con-sonido) <br>
 11. [semáforo mas botón](d#ejercicio-n11-semaforo-mas-boton) <br>
+12. [código sensor processing en grupo](#ejercicio-n12-codigo-sensor-processing-en-grupo) <br>
 # Interfaz-II
 ##### ejercicio numero 1: hola mundo
 
