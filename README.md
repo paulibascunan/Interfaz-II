@@ -730,3 +730,4 @@ void loop() {
  delay(50);
 }
 ```
+<img src="https://github.com/paulibascunan/Interfaz-II/blob/44f937c00465b02a464e2f69fb2282ae14141be4/img/IMG_1303.jpg"/>
