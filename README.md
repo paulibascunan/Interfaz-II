@@ -6,6 +6,7 @@
 5. [semáforo](#ejercicio-5-sem%C3%A1foro) <br>
 6. [semáforo parpadeante](#ejercicio-n6-semaforo-parpadeante)  <br>
 7. [processing](#ejercicio-7) <br>
+8. [if else](#ejercicio-n-8-if-else) <br>
 # Interfaz-II
 ##### ejercicio numero 1: hola mundo
 
