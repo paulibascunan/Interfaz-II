@@ -587,3 +587,146 @@ void reproducirSonido() {
 }
 ```
 <img src="https://github.com/paulibascunan/Interfaz-II/blob/abfa920a57c016b439a7aa1e3872ea80f6c45b62/img/Captura%20de%20pantalla%202025-11-10%20092452.png"/>
+
+##### ejercicio final 
+``` js
+Processing:
+import processing.serial.*;
+import processing.sound.*;
+
+Serial arduino;
+
+// Tres sensores
+int[] lectura = {0, 0, 0};
+
+// Umbrales de distancia
+int cerca = 300;
+int medio = 500;
+int lejos = 800;
+
+// Sonidos independientes (26 para cada sensor)
+SoundFile[][] sonidos;
+int[] sonidoIndex = {0, 0, 0};
+
+void setup() {
+  size(600, 400);
+  println(Serial.list());
+  arduino = new Serial(this, Serial.list()[0], 9600);
+
+  // Cargar sonidos: sonidos[sensor][letra]
+  sonidos = new SoundFile[3][26];
+
+  for (int s = 0; s < 3; s++) {
+    for (int i = 0; i < 26; i++) {
+      char letra = (char)('a' + i);
+      String nombre = "campanilla" + letra + ".mp3";
+      sonidos[s][i] = new SoundFile(this, nombre);
+    }
+  }
+}
+
+void draw() {
+  background(0);
+
+  // Leer datos del Arduino
+  while (arduino.available() > 0) {
+    String val = arduino.readStringUntil('\n');
+    if (val != null) {
+      val = val.trim();
+      String[] partes = val.split(",");
+      if (partes.length == 3) {
+        for (int i = 0; i < 3; i++) {
+          lectura[i] = int(partes[i]);
+        }
+      }
+    }
+  }
+
+  // Dibujar los 3 sensores
+  for (int i = 0; i < 3; i++) {
+
+    //Color
+    if (lectura[i] < cerca) {
+      fill(255, 0, 0); // rojo
+      reproducirSonido(i);
+    } else if (lectura[i] < medio) {
+      fill(255, 255, 0); // amarillo
+    } else if (lectura[i] < lejos) {
+      fill(0, 255, 0); // verde
+    } else {
+      fill(50); // gris
+    }
+
+    // Dibujar círculo
+    ellipse(150 + i * 200, height/2, 150, 150);
+
+    // Texto
+    fill(255);
+    textAlign(CENTER);
+    text("Sensor " + (i+1) + ": " + lectura[i], 150 + i * 200, height - 30);
+  }
+}
+
+void reproducirSonido(int sensor) {
+  int idx = sonidoIndex[sensor];
+
+  if (!sonidos[sensor][idx].isPlaying()) {
+    sonidos[sensor][idx].play();
+    sonidoIndex[sensor] = (idx + 1) % 26;
+  }
+}
+
+Arduino:
+
+// Definición de pines analógicos para los sensores
+const int sensorPin1 = A0;
+const int sensorPin2 = A1;
+const int sensorPin3 = A2;
+
+
+// Variable para almacenar la lectura del sensor (0-1023)
+int valorSensor1 = 0;
+int valorSensor2 = 0;
+int valorSensor3 = 0;
+
+
+// La velocidad de comunicación debe coincidir en Arduino y Processing
+const long BAUD_RATE = 9600;
+
+
+void setup() {
+ // Inicia la comunicación serial
+ Serial.begin(BAUD_RATE);
+}
+
+
+void loop() {
+ // Lectura de los pines analógicos
+ // Para un sensor ultrasónico (HC-SR04), usarías la función NewPing
+ // para obtener la distancia en cm y enviar ese valor.
+ // Aquí usamos analogRead como ejemplo general.
+ valorSensor1 = analogRead(sensorPin1);
+ valorSensor2 = analogRead(sensorPin2);
+ valorSensor3 = analogRead(sensorPin3);
+
+
+ // Mapeamos los valores si es necesario (ej: de 0-1023 a 0-255)
+ // int distancia1 = map(valorSensor1, 0, 1023, 0, 255);
+ // int distancia2 = map(valorSensor2, 0, 1023, 0, 255);
+ // int distancia3 = map(valorSensor3, 0, 1023, 0, 255);
+
+
+ // Enviamos los tres valores concatenados y separados por una coma,
+ // y terminados con un salto de línea para que Processing sepa dónde
+ // termina el mensaje.
+ Serial.print(valorSensor1);
+ Serial.print(",");
+ Serial.print(valorSensor2);
+ Serial.print(",");
+ Serial.println(valorSensor3); // println añade el salto de línea
+
+
+ // Pequeño retardo para no saturar el puerto serial
+ delay(50);
+}
+```
